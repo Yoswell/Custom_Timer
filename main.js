@@ -179,6 +179,21 @@ fileInput2.addEventListener('change', function(event) {
   }
 });
 
+const fileInput3 = document.getElementById('fileInput3');
+const imagePreview3 = document.getElementById('back-preview');
+
+fileInput3.addEventListener('change', function(event) {
+  const file = event.target.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      imagePreview3.innerHTML = `<img src="${e.target.result}" alt="Imagen subida">`;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
 function mostrarHora() {
     const fecha = new Date();
     const horaUtc6 = fecha.toLocaleString('es-CR', { 
@@ -204,74 +219,38 @@ document.getElementById('settings-close').addEventListener('click', (e) => {
     document.querySelector('.edit-cont').style.display = 'none';
 });
 
-let cont3 = false;
+let timerInterval; // Intervalo global
+let totalSeconds = 0; // Tiempo total en segundos
+let isPaused = false; // Control para saber si está en pausa
 
-document.getElementById('show-themes').addEventListener('click', (e) => {
-    e.preventDefault();
-    cont3 = !cont3; // Alterna el valor de cont3
-    if (cont3) {
-        document.getElementById('themes-cont').style.display = 'block'; // Muestra el contenedor
-    } else {
-        document.getElementById('themes-cont').style.display = 'none'; // Oculta el contenedor
-    }
-});
-
-const root = document.documentElement;
-const temas = {
-  oscuro: {
-    '--primary-color': '#000',
-    '--second-color': '#3a393950',
-    '--third-color': '#ffffff',
-    '--six-color': '#7e7e7e',
-    '--eight-color': '#a9ff8f',
-    '--nine-color': '#3a39398c',
-    '--spiral-color': '#fff',
-    '--back-color': '#0000007a'
-  },
-  claro: {
-    '--primary-color': '#ffffff',
-    '--second-color': '#bbbbbb50',
-    '--third-color': '#000000',
-    '--six-color': '#7e7e7e',
-    '--eight-color': '#8fbc8f',
-    '--nine-color': '#9a99998c',
-    '--spiral-color': '#000',
-    '--back-color': '#0000007a'
-  }
-};
-
-document.getElementById('dark-mode').addEventListener('click', () => {
-  aplicarTema('oscuro');
-});
-
-document.getElementById('light-mode').addEventListener('click', () =>  {
-  aplicarTema('claro')
-});
-
-function aplicarTema(tema) {
-    const propiedades = temas[tema];
-    for (const [propiedad, valor] of Object.entries(propiedades)) {
-        root.style.setProperty(propiedad, valor);
-    }
-}
-
-let timerInterval;
-
+// Botón de PLAY
 document.getElementById('play-timer').addEventListener('click', () => {
-    // Obtener valores de los inputs
-    const horas = parseInt(document.getElementById('hora-input').value) || 0;
-    const minutos = parseInt(document.getElementById('minutes-input').value) || 0;
-    const segundos = parseInt(document.getElementById('segundos-input').value) || 0;
-    // Calcular el tiempo total en segundos
-    let totalSeconds = (horas * 3600) + (minutos * 60) + segundos;
-    // Detener cualquier temporizador previo
-    clearInterval(timerInterval);
-    // Iniciar el temporizador
+    // Si ya se pausó antes, no recalcular totalSeconds
+    if (!isPaused) {
+        // Obtener valores de los inputs solo si el temporizador no ha iniciado
+        const horas = parseInt(document.getElementById('hora-input').value) || 0;
+        const minutos = parseInt(document.getElementById('minutes-input').value) || 0;
+        const segundos = parseInt(document.getElementById('segundos-input').value) || 0;
+        totalSeconds = (horas * 3600) + (minutos * 60) + segundos; // Calcular tiempo total
+    }
+    isPaused = false; // Cambiar el estado de pausa
+    clearInterval(timerInterval); // Limpiar cualquier temporizador previo
+    iniciarTemporizador(); // Iniciar el temporizador
+});
+
+// Botón de PAUSE
+document.getElementById('pause-timer').addEventListener('click', () => {
+    isPaused = true; // Cambiar el estado de pausa
+    clearInterval(timerInterval); // Detener el intervalo
+});
+
+// Función para iniciar el temporizador
+function iniciarTemporizador() {
     timerInterval = setInterval(() => {
         if (totalSeconds <= 0) {
-            clearInterval(timerInterval);
+            clearInterval(timerInterval); // Detener el temporizador si llega a 0
         } else {
-            totalSeconds--;
+            totalSeconds--; // Decrementar el tiempo
             // Convertir segundos a formato de horas:minutos:segundos
             const hrs = Math.floor(totalSeconds / 3600);
             const mins = Math.floor((totalSeconds % 3600) / 60);
@@ -282,7 +261,7 @@ document.getElementById('play-timer').addEventListener('click', () => {
             document.getElementById('time3').textContent = String(secs).padStart(2, '0');
         }
     }, 1000);
-});
+}
 
 document.getElementById('btn-increment-hour').addEventListener('click', () =>  {
     document.getElementById('hora-input').stepUp(); 
@@ -322,3 +301,38 @@ updateText('editText1', 'text1');
 updateText('editText2', 'text2');
 updateText('editText3', 'text3');
 updateText('editText4', 'text4');
+
+const colorPicker1 = document.getElementById('color1');
+
+colorPicker1.addEventListener('input', (event) => {
+    const color = event.target.value;
+    document.documentElement.style.setProperty('--third-color', color);
+});
+
+const colorPicker2 = document.getElementById('color2');
+
+colorPicker2.addEventListener('input', (event) => {
+    const color = event.target.value;
+    document.documentElement.style.setProperty('--icon-color', color);
+});
+
+const colorPicker3 = document.getElementById('color3');
+
+colorPicker3.addEventListener('input', (event) => {
+    const color = event.target.value;
+    document.documentElement.style.setProperty('--border-color', color);
+});
+
+const colorPicker4 = document.getElementById('color4');
+
+colorPicker4.addEventListener('input', (event) => {
+    const color = event.target.value;
+    document.documentElement.style.setProperty('--back-color', color);
+});
+
+const colorPicker5 = document.getElementById('color5');
+
+colorPicker5.addEventListener('input', (event) => {
+    const color = event.target.value;
+    document.documentElement.style.setProperty('--eight-color', color);
+});
