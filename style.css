@@ -2,13 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
 
 :root {
-    --primary-color: #000;
+    --primary-color: #fff;
     --second-color: #3a393950;
-    --third-color: #fff;
-    --eight-color: #8fbc8f;
+    --third-color: #000;
+    --eight-color: #8890ff;
     --nine-color: #3a39398c;
     --spiral-color: #fff;
-    --back-color: #0000007a;
+    --icon-color: #fff;
+    --border-color: #000;
+    --back-color: #000;
 }
 
 * {
@@ -31,70 +33,76 @@ canvas {
     width: 100%;
     height: 100%;
     z-index: -1;
-    filter: blur(10px);
+    display: none;
 }
 
-.float-div-left {
+.back-preview {
     position: absolute;
-    top: 15px;
-    left: 15px;
+    width: 100vw;
+    height: 100vw;
+    z-index: -1;
+    left: 0;
+    top: 0;
+}
+
+.float-div-top-left {
+    margin: 10px 0 0 10px;
     display: flex;
-    align-items: center;
     gap: 10px;
-    
-    & .same-padding {
-        padding: 10px 20px 10px 20px !important;
-    }
-    
+
     & .separate {
         border-radius: 10px;
-        padding: 10px 20px 10px 5px;
-        background-color: var(--second-color);
         backdrop-filter: blur(5px);
-        border: 1px solid var(--nine-color);
         display: flex;
         align-items: center;
-        gap: 10px;
         height: 40px;
+        padding: 10px 15px;
+        border-radius: 20px;
+        border: 2px solid var(--border-color);
 
         & div {
             height: 30px;
         }
+
+        & img {
+            width: 30px;
+            height: 30px;
+            border-radius: 12px;
+            padding: 5px;
+        }
     }
 
-    & img {
-        width: 30px;
-        height: 30px;
-        border-radius: 8px;
-        background-color: var(--second-color);
-        padding: 5px;
-    }
 
     & h3 {
         color: var(--third-color);
-        font-weight: 500;
+        font-weight: 600;
         font-size: 16px;
     }
-
 }
 
 .float-div-bottom-left {
     position: absolute;
-    bottom: 58px;
+    bottom: 50px;
     left: 15px;
     border-radius: 10px;
     display: grid;
     gap: 10px;
 
-    & h1 {
-        color: var(--third-color);
-        font-size: 20px;
-    }
-
+    
     & .mini-card {
         color: var(--eight-color);
-        font-weight: 500;
+        font-weight: 600;
+        font-size: 18px;
     }
+
+    & h1 {
+        color: var(--third-color);
+        font-size: 25px;
+    }
+}
+
+.spot {
+    width: 100px;
 }
 
 .cont-timer {
@@ -105,7 +113,8 @@ canvas {
     z-index: 1000;
     display: flex;
     place-items: center;
-    gap: 20px;
+    justify-content: center;
+    flex-direction: column;
     margin-top: -40px;
 
     & .border-load {
@@ -117,53 +126,44 @@ canvas {
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 50px;
 
         & h1 {
-            min-width: 180px;
-            max-width: 180px;
+            min-width: 160px;
+            max-width: 160px;
             color: var(--third-color);
             font-size: 150px;
-            font-family: "Finger Paint", sans-serif;
-        }
-
-        & h2 { 
-            min-width: 65px; 
-            font-size: 150px; 
-            color: var(--third-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: "Finger Paint", sans-serif;
         }
     }
 }
 
 .cont-button {
-    position: absolute;
-    bottom: 58px;
-    right: 15px;
     z-index: 1000;
     gap: 10px;
     display: flex;
-
+    
     & button {
-        font-size: 20px;
+        width: 100px;
+        font-size: 25px;
+        padding: 5px;
+        background-color: var(--back-color);
 
         & i {
-            color: var(--third-color);
+            color: var(--icon-color);
         }
     }
 }
 
 & button {
-    background-color: var(--second-color);
-    border: 1px solid var(--nine-color);
-    padding: 8px 10px;
-    backdrop-filter: blur(5px);
-    border-radius: 10px;
+    background-color: transparent;
+    border: none;
+    border-radius: 20px;
     cursor: pointer;
     font-weight: 500;
-
-    & i {
-        color: var(--third-color);
-    }
 }
 
 .themes-cont {
@@ -191,33 +191,35 @@ canvas {
     height: 100vh;
     z-index: 1000;
     display: none;
-    place-items: end;
+    place-items: center;
+    overflow: hidden;
 
     & .settings-cont {
         display: flex;
         flex-direction: column;
-        width: 400px;
-        height: 100vh;
+        width: 600px;
+        height: auto;
         gap: 20px;
         padding: 20px;
-        background-color: transparent;
+        border-radius: 20px;
+        background-color: #000;
         backdrop-filter: blur(100px);
-        border-left: 1px solid var(--nine-color);
 
         & label {
-            color: var(--third-color);
-            font-size: 17px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
         }
 
         & input {
             font-size: 16px;
-            background-color: transparent;
-            border: 1px solid var(--nine-color);
+            background-color: #3a393950;
+            border: 1px solid #555555;
             border-radius: 6px;
-            padding: 5px 10px;
+            padding: 8px 10px;
             width: 100%;
             font-weight: 500;
-            color: var(--third-color);
+            color: #fff;
 
             &:focus {
                 outline: none;
@@ -246,16 +248,16 @@ canvas {
             & .btn-decrement {
                 border-radius: 3px;
                 width: 8px;
-                color: var(--third-color);
                 height: 15px;
                 position: absolute;
-                right: 40px;
+                right: 35px;
+                background-color: #7b7b80;
             }
 
             & .btn-increment {
                 border-radius: 3px;
                 width: 8px;
-                color: var(--third-color);
+                background-color: #7b7b80;
                 height: 15px;
                 position: absolute;
                 right: 10px;
@@ -267,7 +269,6 @@ canvas {
         & button {
             background-color: var(--second-color);
             font-size: 22px;
-            border: 1px solid var(--nine-color);
             padding: 5px 10px;
             border-radius: 8px;
             cursor: pointer;
@@ -281,10 +282,16 @@ canvas {
         grid-template-columns: 1fr;
         gap: 10px;
 
+        & label {
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+        }
     }
     
     & .columns2 {
         display: flex;
+        flex-wrap: wrap;
         gap: 10px;
         
         & input {
@@ -294,17 +301,19 @@ canvas {
         & button {
             color: var(--third-color);
             font-size: 16px;
+            white-space: nowrap;
         }
 
         & .custom-file-upload {
-            background-color: var(--second-color);
-            border: 1px solid var(--nine-color);
+            background-color: #3a393950;
+            border: 1px solid #555555;
             border-radius: 6px;
-            font-size: 16px;
-            padding: 5px 10px;
-            font-weight: 500;
+            font-size: 15px;
+            padding: 8px 15px;
+            font-weight: 600;
             cursor: pointer;
-            color: var(--third-color);
+            white-space: nowrap;
+            color: #7b7b80;
         }
     }
 
@@ -323,15 +332,19 @@ canvas {
 
 .close-button {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    top: 5px;
+    right: 5px;
+    z-index: 1000;
+    background: transparent !important;
+
+    & i { color: #fff !important; }
 }
 
 footer {
     width: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border-top: 1px solid var(--nine-color);
+    backdrop-filter: blur(5px);
     position: fixed;
     bottom: 0;
     padding: 10px;
@@ -340,7 +353,7 @@ footer {
     justify-content: center;
 
     & p {
-        color: var(--nine-color);
+        color: var(--third-color);
         font-size: 15px;
         font-weight: 500;
     }
