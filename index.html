@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css">
+        <link rel="stylesheet" href="style.css">
+        <title>Timer</title>
+    </head>
+
+    <body>
+        <canvas></canvas>
+        <div class="float-div-left">
+            <div class="separate">
+                <div id="imagePreview1"></div> 
+                <h3 id="text1"></h3>
+            </div>
+            <div class="separate">
+                <div id="imagePreview2"></div>
+                <h3 id="text2"></h3>
+            </div>
+            <div class="separate same-padding">
+                <h3 id="hour"></h3>
+            </div>
+        </div>
+
+        <div class="float-div-bottom-left">
+            <p class="mini-card" id="text3"></p>
+            <h1 id="text4"></h1>
+        </div>
+
+        <div class="cont-timer">
+            <div class="border-load">
+                <h1 id="time1">00</h1>
+                <h2>:</h2>
+                <h1 id="time2">00</h1>
+                <h2>:</h2>
+                <h1 id="time3">00</h1>
+            </div>
+        </div>
+
+        <div class="cont-button">
+            <button id="play-timer"><i class="ri-play-fill"></i></button>
+            <button id="settings"><i class="ri-settings-2-line"></i></button>
+            <button id="show-themes"><i class="ri-sun-line"></i></button>
+        </div>
+
+        <div class="themes-cont" id="themes-cont">
+            <button id="light-mode">Light</button>
+            <button id="dark-mode">Dark</button>
+        </div>
+
+        <div class="edit-cont">
+            <div class="settings-cont">
+                <button class="close-button" id="settings-close"><i class="ri-close-line"></i></button>
+                <div class="columns">
+                    <input id="editText1" type="text" placeholder="Edit text..." />
+                    <input id="editText2" type="text" placeholder="Edit text..." />
+                    <input id="editText3" type="text" placeholder="Edit text..." />
+                    <input id="editText4" type="text" placeholder="Edit text..." />
+                </div>
+                <div class="columns2">
+                    <label for="fileInput1" class="custom-file-upload">
+                        Upload
+                    </label>
+                    <input type="file" id="fileInput1" class="file-input" accept="image/*">
+                    <label for="fileInput2" class="custom-file-upload">
+                        Upload
+                    </label>
+                    <input type="file" id="fileInput2" class="file-input" accept="image/*">
+                    <button id="update">Update</button>
+                </div>
+                <div class="row">
+                    <div>
+                        <label>Horas</label>
+                        <div style="display: flex; align-items: center;">
+                            <button class="btn-decrement" id="btn-decrement-hour"></button>
+                            <input type="number" id="hora-input" min="0" max="23" placeholder="0" />
+                            <button class="btn-increment" id="btn-increment-hour"></button>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Minutos</label>
+                        <div style="display: flex; align-items: center;">
+                            <button class="btn-decrement" id="btn-decrement-min"></button>
+                            <input type="number" id="minutes-input" min="0" max="59" placeholder="0" />
+                            <button class="btn-increment" id="btn-increment-min"></button>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Segundos</label>
+                        <div style="display: flex; align-items: center;">
+                            <button class="btn-decrement" id="btn-decrement-seg"></button>
+                            <input type="number" id="segundos-input" min="0" max="59" placeholder="0" />
+                            <button class="btn-increment" id="btn-increment-seg"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Programe your timer with this, developed by Vishok</p>
+        </footer>
+    </body>
+
+    <script src="main.js"></script>
+</html>
