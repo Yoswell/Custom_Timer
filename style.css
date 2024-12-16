@@ -82,13 +82,12 @@ canvas {
 
 .float-div-bottom-left {
     position: absolute;
-    bottom: 50px;
+    bottom: 10px;
     left: 15px;
     border-radius: 10px;
     display: grid;
     gap: 10px;
 
-    
     & .mini-card {
         color: var(--eight-color);
         font-weight: 600;
@@ -341,20 +340,21 @@ canvas {
 }
 
 footer {
-    width: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+    width: auto;
+    right: 10px;
     backdrop-filter: blur(5px);
     position: fixed;
-    bottom: 0;
+    bottom: 10px;
     padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 20px;
+    border: 2px solid var(--border-color);
 
     & p {
         color: var(--third-color);
         font-size: 15px;
-        font-weight: 500;
+        font-weight: 600;
     }
 }
