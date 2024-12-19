@@ -56,8 +56,8 @@ function clear() {
 
 function render() {
   var x, y,
-      cx = width/2,
-      cy = height/2;
+      cx = width / 2,
+      cy = height / 2;
 
   context.globalCompositeOperation = 'lighter';
   context.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--spiral-color').trim();
@@ -72,12 +72,12 @@ function render() {
         ay = Math.cos( value/POINTS_PER_LAP ) * Math.PI;
 
     x = ax * value,
-    y = ay * value * 0.35;
+    y = ay * value * 0.1;
     
     var o = 1 - ( Math.min( value, PEAK ) / PEAK );
     
     y -= Math.pow( o, 2 ) * 200;
-    y += 200 * value / MAX_OFFSET;
+    y += 500 * value / MAX_OFFSET;
     y += x / cx * width * 0.1;
     
     context.globalAlpha = 1 - ( value / MAX_OFFSET );
